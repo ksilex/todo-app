@@ -5,10 +5,14 @@ import (
 
 	"github.com/ksilex/todo-app"
 	"github.com/ksilex/todo-app/pkg/handler"
+	"github.com/ksilex/todo-app/pkg/repository"
+	"github.com/ksilex/todo-app/pkg/service"
 )
 
 func main() {
-	handlers := new(handler.Handler)
+	repos := repository.NewRepository()
+	services := service.NewService(repos)
+	handlers := handler.NewHandler(services)
 	srv := new(todo.Server)
 	if err := srv.Run("8000", handlers.InitRoutes()); err != nil {
 		log.Fatalf("error occured %s", err.Error())

@@ -24,7 +24,7 @@ create table todo_items (
   done boolean not null default false
 );
 
-create table items_lists (
+create table lists_items (
   id serial primary key,
   item_id int references todo_items (id) on delete cascade not null,
   todo_id int references todo_lists (id) on delete cascade not null
